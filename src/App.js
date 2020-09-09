@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css'
+import './reset.css'
 import axios from 'axios'
 import Header from './components/Header/Header'
 import Form from './components/Form/Form'
@@ -11,7 +12,8 @@ export default class App extends Component {
     super()
     this.state = {
       inventory: [],
-      currentProduct: {}
+      currentProduct: {},
+      editing: false
     }
     this.componentDidMount = this.componentDidMount.bind(this)
     this.setCurrentProduct = this.setCurrentProduct.bind(this)
@@ -28,18 +30,27 @@ export default class App extends Component {
   setCurrentProduct(id) {
     axios.get(`/api/inventory/${id}`).then(res => {
       this.setState({
-        currentProduct: res.data
+        currentProduct: res.data,
+        editing: true
       })
+      console.log(this.state.currentProduct)
     })
   }
 
 
   render() {
     return (
-      <div>
+      <div className='app'>
         < Header />
-        < Form updateInventory={this.componentDidMount} currentProduct={this.state.currentProduct} />
-        < Dashboard inventory={this.state.inventory} updateInventory={this.componentDidMount} setCurrentProduct={this.setCurrentProduct} />
+        < Form
+          updateInventory={this.componentDidMount}
+          currentProduct={this.state.currentProduct}
+          editing={this.state.editing}
+          inventory={this.state.inventory} />
+        < Dashboard
+          inventory={this.state.inventory}
+          updateInventory={this.componentDidMount}
+          setCurrentProduct={this.setCurrentProduct} />
       </div>
     )
   }

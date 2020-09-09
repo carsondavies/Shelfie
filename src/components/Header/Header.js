@@ -9,7 +9,8 @@ export default class Header extends Component {
 
   render() {
     return (
-      <div>Header.js</div>
+      <header className='header'
+      >SHELFIE</header>
     )
   }
 }
