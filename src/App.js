@@ -30,7 +30,7 @@ export default class App extends Component {
   setCurrentProduct(id) {
     axios.get(`/api/inventory/${id}`).then(res => {
       this.setState({
-        currentProduct: res.data,
+        currentProduct: res.data[0],
         editing: true
       })
       console.log(this.state.currentProduct)

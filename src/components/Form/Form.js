@@ -61,8 +61,9 @@ export default class Form extends Component {
       .catch(err => console.log(err))
   }
 
-  editProduct(id, name, price, imgurl) {
-    // const { id, name, price, imgurl } = this.state
+  editProduct() {
+    const { name, price, imgurl } = this.state
+    const { id } = this.props.currentProduct
     axios.put(`/api/inventory/${id}`, { name, price, img: imgurl }).then(res => {
       this.setState({
         id: this.props.currentProduct.id,
@@ -77,6 +78,7 @@ export default class Form extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className='form'>
         <div>
